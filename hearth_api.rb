@@ -12,19 +12,12 @@ class GetCards
 
         request = Net::HTTP::Get.new(url)
         request["x-rapidapi-host"] = 'omgvamp-hearthstone-v1.p.rapidapi.com'
-        request["x-rapidapi-key"] = 'b8b42e3fc9mshf1351a8a149b04fp1e9de7jsn551d4560ac41'
+        request["x-rapidapi-key"] = ENV['API_KEY']
 
         response = http.request(request)
         json = JSON.parse(response.read_body)
         json.collect do |card|
-            Card.create(card)
-        end
-    end
-
-    def cards_format
-        cards = JSON.parse(self.get_cards)
-        cards.collect do |card|
-            card["name"]  
+            puts card["name"]
         end
     end
     
